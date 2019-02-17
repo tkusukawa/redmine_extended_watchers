@@ -4,7 +4,6 @@ Rails.logger.info 'Starting Extended Watchers plugin for Redmine'
 
 require_dependency 'extended_watchers_issue_patch'
 require_dependency 'extended_watchers_controller_patch'
-require_dependency 'extended_watchers_user_patch'
 
 Rails.configuration.to_prepare do
   unless Issue.included_modules.include?(ExtendedWatchersIssuePatch)
@@ -13,10 +12,6 @@ Rails.configuration.to_prepare do
 
   unless WatchersController.included_modules.include?(ExtendedWatchersControllerPatch)
       WatchersController.send(:include, ExtendedWatchersControllerPatch)
-  end
-
-  unless User.included_modules.include?(ExtendedWatchersUserPatch)
-      User.send(:include, ExtendedWatchersUserPatch)
   end
 
   unless Project.included_modules.include?(ExtendedWatchersProjectPatch)
